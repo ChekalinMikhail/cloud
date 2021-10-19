@@ -14,8 +14,11 @@ public class CardNumberValidator implements ConstraintValidator<CardNumber, Stri
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
+    if (value == null)
+      return false;
+
     Pattern pattern = Pattern.compile("^[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$");
-    Matcher matcher = pattern.matcher(value);
+    Matcher matcher = pattern.matcher(value.trim());
 
     return matcher.matches();
   }
